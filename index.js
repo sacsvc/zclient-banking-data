@@ -28,7 +28,7 @@ async function main() {
     const updatedWorkbook = xlsx.utils.book_new();
     xlsx.utils.book_append_sheet(updatedWorkbook, updatedSheet, sheetName);
 
-    // ⚠️ Sobrescribe el archivo original
+    // ⚠️ Sobrescribe el archivo existente
     xlsx.writeFile(updatedWorkbook, 'output.xlsx');
 }
 
