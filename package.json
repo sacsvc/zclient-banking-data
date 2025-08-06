@@ -1,0 +1,26 @@
+{
+  "name": "zclient-banking-data",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sacsvc/zclient-banking-data.git"
+  },
+  "author": "Diceasa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sacsvc/zclient-banking-data/issues"
+  },
+  "homepage": "https://github.com/sacsvc/zclient-banking-data#readme",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "node-fetch": "^3.3.2",
+    "xlsx": "^0.18.5"
+  }
+}
