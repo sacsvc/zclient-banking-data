@@ -1,9 +1,10 @@
 import xlsx from 'xlsx';
+import cron from 'node-cron';
 import dotenv from 'dotenv';
 dotenv.config();
 import { getProfileData } from './src/getProfileData.js';
 
-async function main() {
+cron.schedule('0 8-20 * * *', async () => {
     const workbook = xlsx.readFile('input.xlsx');
     const sheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[sheetName];
@@ -30,6 +31,6 @@ async function main() {
 
     // ⚠️ Sobrescribe el archivo existente
     xlsx.writeFile(updatedWorkbook, 'output.xlsx');
-}
-
-main();
+}, {
+    timezone: 'America/Santiago'
+});

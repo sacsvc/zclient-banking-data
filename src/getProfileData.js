@@ -25,12 +25,12 @@ export async function getProfileData(data) {
                 console.log("No se encontraron datos del usuario con el correo:", data.mail);
                 return;
             }else{
-            console.log("Banco del usuario:", banco);
-            console.log("Cuenta de destino del usuario:", cuentaDestino);
-            console.log("Número de cuenta bancaria del usuario:", nCtaBancaria);
-            console.log("RUT del usuario:", rutUser);
-            console.log("RUT de la cuenta bancaria del usuario:", rutCtaBancaria);
-            console.log("Tipo de cuenta bancaria del usuario:", tipoCuentaBancaria);
+            console.log("Banco:", banco);
+            console.log("Cuenta de destino:", cuentaDestino);
+            console.log("Número de cuenta bancaria:", nCtaBancaria);
+            console.log("RUT:", rutUser);
+            console.log("RUT de la cuenta bancaria:", rutCtaBancaria);
+            console.log("Tipo de cuenta bancaria:", tipoCuentaBancaria);
             console.log("===========================================");
             }
             return data;
