@@ -20,14 +20,32 @@ export async function getProfileData(id) {
         const profileData = userData.user;
         const fields = userData.user?.user_fields || {};
 
+        const codeBank = {
+            'falabella': '051',
+            'santander': '037',
+            'estado': '012',
+            'coopeuch': '672',
+            'chile': '001',
+            'itau': '039',
+            'bci': '016',
+            'scotiabank': '014',
+        }
+
+        const bankcode = codeBank[fields.banco]
+
         const bankingData = {
             fullName: profileData.name || "Sin Informacion",
             nameCtaBancaria: fields.nombre || "Sin Informacion",
             banco: fields.banco || "Sin Informacion",
+            bankcode: bankcode || "Sin Informacion",
             nCtaBancaria: fields.n_cta_bancaria || "Sin Informacion",
             rutUser: fields.rut || "Sin Informacion",
             rutCtaBancaria: fields.rut_cta_bancaria || "Sin Informacion",
-            tipoCuentaBancaria: fields.tipo_cta_bancaria || "Sin Informacion",
+            tipoCuentaBancaria: !fields.tipo_cta_bancaria || fields.tipo_cta_bancaria === "Sin Informacion"
+                ? "Sin Informacion"
+                : fields.tipo_cta_bancaria === "corriente"
+                    ? "cc"
+                    : "cv",
             cuentaDestino: fields.cuenta_destino || "Sin Informacion"
         };
         return bankingData;
