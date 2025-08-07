@@ -2,35 +2,102 @@ import xlsx from 'xlsx';
 import cron from 'node-cron';
 import dotenv from 'dotenv';
 dotenv.config();
-import { getProfileData } from './src/getProfileData.js';
+import { getTicketData } from './src/getTicketData.js';
 
-cron.schedule('*/30 8-20 * * *', async () => {
-    const workbook = xlsx.readFile('input.xlsx');
+// cron.schedule('*/30 8-20 * * *', async () => {
+//     const workbook = xlsx.readFile('input.xlsx');
+//     const sheetName = workbook.SheetNames[0];
+//     const worksheet = workbook.Sheets[sheetName];
+//     const rows = xlsx.utils.sheet_to_json(worksheet);
+
+//     if (!rows || rows.length === 0) {
+//         console.error("No se encontraron datos en el archivo de entrada.");
+//         return;
+//     }
+
+//     console.log("Procesando", rows.length, "tickets...");
+
+//     for (const row of rows) {
+//         const ticketId = row.ticket_id || row.id; // Asegúrate de tener una columna con el ID
+//         const result = await getTicketData(ticketId);
+
+//         if (result) {
+//             row.banco = result.banco;
+//             row.n_cta_bancaria = result.nCtaBancaria;
+//             row.rut = result.rutUser;
+//             row.rut_cta_bancaria = result.rutCtaBancaria;
+//             row.tipo_cta_bancaria = result.tipoCuentaBancaria;
+//             row.cuenta_destino = result.cuentaDestino;
+
+//             row.tipoCuenta = result.tipoCuenta;
+//             row.motivoDevolucion = result.motivoDevolucion;
+//             row.folioNc = result.folioNc;
+//             row.fechaNc = result.fechaNc;
+//             row.montoDevolucion = result.montoDevolucion;
+//             row.order = result.order;
+//         } else {
+//             console.warn("No se pudo procesar el ticket ID:", ticketId);
+//         }
+//     }
+
+//     const updatedSheet = xlsx.utils.json_to_sheet(rows);
+//     const updatedWorkbook = xlsx.utils.book_new();
+//     xlsx.utils.book_append_sheet(updatedWorkbook, updatedSheet, sheetName);
+//     xlsx.writeFile(updatedWorkbook, 'output.xlsx');
+
+//     console.log("Archivo 'output.xlsx' actualizado correctamente.");
+// }, {
+//     timezone: 'America/Santiago'
+// });
+
+
+async function main() {
+     const workbook = xlsx.readFile('input.xlsx');
     const sheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[sheetName];
-    const data = xlsx.utils.sheet_to_json(worksheet);
-    
-    if (!data || data.length === 0) {
+    const rows = xlsx.utils.sheet_to_json(worksheet);
+
+    if (!rows || rows.length === 0) {
         console.error("No se encontraron datos en el archivo de entrada.");
         return;
     }
 
-    console.log("Datos a procesar:", data.length, "filas.");
-    for (const items of data) {
-        const data = await getProfileData(items);
-        items.banco = data?.banco || "Sin Informacion";
-        items.n_cta_bancaria = data?.n_cta_bancaria || "Sin Informacion";
-        items.rut = data?.rut || "Sin Informacion";
-        items.rut_cta_bancaria = data?.rut_cta_bancaria || "Sin Informacion";
-        items.tipo_cta_bancaria = data?.tipo_cta_bancaria || "Sin Informacion";
-        items.cuenta_destino = data?.cuenta_destino || "Sin Informacion";
+    console.log("Procesando", rows.length, "tickets...");
+
+    for (const row of rows) {
+        const ticketId = row.ticketId || row.id; // Asegúrate de tener una columna con el ID
+        const result = await getTicketData(ticketId);
+
+        if (result) {
+            row.fullName = result.datosBancarios.fullName;
+            row.nameCtaBancaria = result.datosBancarios.nameCtaBancaria;
+            row.banco = result.datosBancarios.banco;
+            row.n_cta_bancaria = result.datosBancarios.nCtaBancaria;
+            row.rut = result.datosBancarios.rutUser;
+            row.rut_cta_bancaria = result.datosBancarios.rutCtaBancaria;
+            row.tipo_cta_bancaria = result.datosBancarios.tipoCuentaBancaria;
+            row.cuenta_destino = result.datosBancarios.cuentaDestino;
+
+            row.tienda = result.tienda;
+            row.medioDePago = result.medioDePago;
+            row.motivoDevolucion = result.motivoDevolucion;
+            row.folioNc = result.folioNc;
+            row.fechaNc = result.fechaNc;
+            row.montoDevolucion = result.montoDevolucion;
+            row.estadoDevolucion = result.estadoDevolucion;
+            row.order = result.order;
+            row.fechaTicket = result.fechaTicket;
+        } else {
+            console.warn("No se pudo procesar el ticket ID:", ticketId);
+        }
     }
-    const updatedSheet = xlsx.utils.json_to_sheet(data);
+
+    const updatedSheet = xlsx.utils.json_to_sheet(rows);
     const updatedWorkbook = xlsx.utils.book_new();
     xlsx.utils.book_append_sheet(updatedWorkbook, updatedSheet, sheetName);
-
-    // ⚠️ Sobrescribe el archivo existente
     xlsx.writeFile(updatedWorkbook, 'output.xlsx');
-}, {
-    timezone: 'America/Santiago'
-});
+
+    console.log("Archivo 'output.xlsx' actualizado correctamente.");
+}
+
+main();
