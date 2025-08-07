@@ -31,17 +31,18 @@ export async function getProfileData(id) {
             'scotiabank': '014',
         }
 
-        const bankcode = codeBank[fields.banco]
+        const bankCode = codeBank[fields.banco]
 
         const bankingData = {
             fullName: profileData.name || "Sin Informacion",
             nameCtaBancaria: fields.nombre || "Sin Informacion",
             banco: fields.banco || "Sin Informacion",
-            bankcode: bankcode || "Sin Informacion",
-            nCtaBancaria: fields.n_cta_bancaria || "Sin Informacion",
+            bankCode: bankCode || "Sin Informacion",
+            nroCtaBancaria: fields.n_cta_bancaria || "Sin Informacion",
             rutUser: fields.rut || "Sin Informacion",
             rutCtaBancaria: fields.rut_cta_bancaria || "Sin Informacion",
-            tipoCuentaBancaria: !fields.tipo_cta_bancaria || fields.tipo_cta_bancaria === "Sin Informacion"
+            tipoCtaBancaria: fields.tipo_cta_bancaria || "Sin Informacion",
+            tipoCuenta: !fields.tipo_cta_bancaria || fields.tipo_cta_bancaria === "Sin Informacion"
                 ? "Sin Informacion"
                 : fields.tipo_cta_bancaria === "corriente"
                     ? "cc"

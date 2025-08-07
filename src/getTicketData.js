@@ -72,7 +72,7 @@ export async function getTicketData(ticketId) {
         const resultado = {
             id: ticket.id || "Sin Informacion",
             fechaTicket: fechaTicket || "Sin Informacion",
-            requester_id: ticket.requester_id || "Sin Informacion",
+            profileId: ticket.requester_id || "Sin Informacion",
             motivoDevolucion: await getFieldOptionNameByValue(360053290773, customFieldsMap[360053290773]) || "Sin Informacion",
             tienda: await getFieldOptionNameByValue(360052677134, customFieldsMap[360052677134]) || "Sin Informacion",
             medioDePago: await getFieldOptionNameByValue(360053290693, customFieldsMap[360053290693]) || "Sin Informacion",

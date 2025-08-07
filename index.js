@@ -25,11 +25,12 @@ cron.schedule('*/30 8-20 * * *', async () => {
             row.fullName = result.datosBancarios.fullName;
             row.nameCtaBancaria = result.datosBancarios.nameCtaBancaria;
             row.banco = result.datosBancarios.banco;
-            row.bankcode = result.datosBancarios.bankcode;
-            row.n_cta_bancaria = result.datosBancarios.nCtaBancaria;
+            row.bankCode = result.datosBancarios.bankCode;
+            row.n_cta_bancaria = result.datosBancarios.nroCtaBancaria;
             row.rut = result.datosBancarios.rutUser;
             row.rut_cta_bancaria = result.datosBancarios.rutCtaBancaria;
-            row.tipo_cta_bancaria = result.datosBancarios.tipoCuentaBancaria;
+            row.tipo_cta_bancaria = result.datosBancarios.tipoCtaBancaria;
+            row.tipo_Cuenta = result.datosBancarios.tipoCuenta;
             row.cuenta_destino = result.datosBancarios.cuentaDestino;
 
             row.tienda = result.tienda;
