@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import { getProfileData } from './src/getProfileData.js';
 
-cron.schedule('0 8-20 * * *', async () => {
+cron.schedule('*/30 8-20 * * *', async () => {
     const workbook = xlsx.readFile('input.xlsx');
     const sheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[sheetName];
