@@ -29,13 +29,14 @@ export async function getProfileData(id) {
             'itau': '039',
             'bci': '016',
             'scotiabank': '014',
+            'mercadopago': '875',
         }
 
         const bankCode = codeBank[fields.banco]
 
         const bankingData = {
             fullName: profileData.name || "Sin Informacion",
-            nameCtaBancaria: fields.nombre || "Sin Informacion",
+            nameCtaBancaria: fields.nombre_cta_bancaria || "Sin Informacion",
             banco: fields.banco || "Sin Informacion",
             bankCode: bankCode || "Sin Informacion",
             nroCtaBancaria: fields.n_cta_bancaria || "Sin Informacion",
