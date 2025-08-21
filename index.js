@@ -91,12 +91,12 @@ async function main() {
             row.medioDePago = result.medioDePago;
             row.motivoDevolucion = result.motivoDevolucion;
             row.folioNc = result.folioNc;
+            row.tipoNC = result.tipoNC;
             row.fechaNc = result.fechaNc;
             row.montoDevolucion = result.montoDevolucion;
             row.estadoDevolucion = result.estadoDevolucion;
             row.order = result.order;
             row.fechaTicket = result.fechaTicket;
-            row.tipoNC = result.tipoNC;
         } else {
             console.warn("No se pudo procesar el ticket ID:", ticketId);
         }
