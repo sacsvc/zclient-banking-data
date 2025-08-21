@@ -77,6 +77,7 @@ export async function getTicketData(ticketId) {
             tienda: await getFieldOptionNameByValue(360052677134, customFieldsMap[360052677134]) || "Sin Informacion",
             medioDePago: await getFieldOptionNameByValue(360053290693, customFieldsMap[360053290693]) || "Sin Informacion",
             estadoDevolucion: await getFieldOptionNameByValue(360054407433, customFieldsMap[360054407433]) || "Sin Informacion",
+            tipoNC : await getFieldOptionNameByValue(11399111912087, customFieldsMap[11399111912087]) || "Sin Informacion",
             folioNc: customFieldsMap[360053290533] || "Sin Informacion",
             fechaNc: customFieldsMap[1500003696702] || "Sin Informacion",
             montoDevolucion: customFieldsMap[360053290593] || "Sin Informacion",
